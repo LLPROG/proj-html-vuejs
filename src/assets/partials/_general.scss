@@ -13,3 +13,19 @@ html {
     width: 1300px;
     margin: 0 auto;
 }
+
+.btn {
+   padding: 0.5rem 1rem;
+   text-transform: uppercase;
+   border: transparent;
+   cursor: pointer;
+}
+
+.btn-shark {
+    background-color: #1a1b1b;
+    color: white;
+}
+
+.btn-blue {
+    background-color: #27aabe;
+}
