@@ -24,7 +24,7 @@ export default {
 @import '../assets/style.scss';
 .hero {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   background-image: url('../assets/img/home_slider_bg.jpg');
   background-position: center center;
   background-size: cover;
@@ -33,10 +33,13 @@ export default {
 
   h1 {
     font-size: 8em;
+    margin-bottom: 3rem;
   }
 
   p {
-    margin: 1rem 0;
+    margin-bottom: 4rem;
+    font-size: 1.5em;
+    color: rgb(168, 168, 168);
   }
 }
 

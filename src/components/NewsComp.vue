@@ -26,13 +26,7 @@
         <div class="section-articles">
           <!-- top articles 3 in a row -->
           <div class="top-article">
-            <div class="card-article" v-for=" art in article.arrArticleTop" :key="art.id">
-              <img :src="art.image" :alt="art.title">
-              <h3 class="card-title">{{art.title}}</h3>
-              <span>{{art.date}}</span>
-              <span>{{art.comments}}</span>
-              <p class="card-content">{{art.content}}</p>
-            </div>
+            <card-news-comp  v-for="art in article.arrArticleTop" :key="art.id" :data-card="art"/>
           </div>
 
           <!-- main article just 1 -->
@@ -50,14 +44,9 @@
         <div class="section-articles">
           <!-- top articles 3 in a row -->
           <div class="top-article">
-            <div class="card-article" v-for=" art in article.arrArticleBottom" :key="art.id">
-              <img :src="art.image" :alt="art.title">
-              <h3 class="card-title">{{art.title}}</h3>
-              <span>{{art.date}}</span>
-              <span>{{art.comments}}</span>
-              <p class="card-content">{{art.content}}</p>
-            </div>
+            <card-news-comp  v-for="art in article.arrArticleBottom" :key="art.id" :data-card="art"/>
           </div>
+
           <!-- cont for flex main articles and tutorial section  -->
           <div class="cont-flex">
             <!-- main article just 1 -->
@@ -80,6 +69,7 @@
                 <div class="cont-content-tuto">
                   <h3 class="tuto-card-title">{{art.title}}</h3>
                   <span>{{art.date}}</span>
+                  <span class="span-line"></span>
                   <span>{{art.comments}}</span>
                   </div>
               </div>
@@ -99,6 +89,7 @@ import img3 from '../assets/img/post_feat_img_22-320x202.jpg'
 import img4 from '../assets/img/post_feat_img_23-320x202.jpg'
 import img5 from '../assets/img/post_feat_img_24-320x202.jpg'
 import img6 from '../assets/img/post_feat_img_25-320x202.jpg'
+import CardNewsComp from './CardNewsComp.vue'
 
 export default {
   name: 'NewsComp',
@@ -195,6 +186,9 @@ export default {
         ]
       }
     }
+  },
+  components: {
+    CardNewsComp
   }
 }
 </script>
@@ -243,21 +237,6 @@ export default {
       text-align: left;
       .top-article {
         @include flexbox (space-between, none, none);
-        .card-article {
-          width: 320px;
-          .card-title {
-            margin: 0.5rem 0;
-          }
-          span {
-            display: inline-block;
-            color: $nevada;
-            margin-bottom: 0.5rem;
-          }
-          .card-content {
-            color: $nevada;
-            line-height: 1.3rem;
-          }
-        }
       }
       .main-article {
         color: white;
@@ -281,7 +260,7 @@ export default {
         margin: 2rem 0;
       }
       .main-article.two {
-        width: 100%;
+        width: 120%;
         padding: 6rem 6rem;
         background-image: url('../assets/img/featured_article_2_bg.jpg');
         background-size: cover;
@@ -294,19 +273,24 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: space-around;
-
-          .tutorial-title {
-
+          .card-tutorials {
+            @include flexbox(none, none, none);
+            img {
+              width: 40%;
+              margin-right: 1rem;
+            }
+            span {
+              display: inline-block;
+              color: $nevada;
+              margin-bottom: 0.5rem;
+            }
+            .span-line {
+              width: 1px;
+              height: 12px;
+              margin: 0 0.2rem;
+              background-color: $nevada;
+            }
           }
-        }
-        .card-tutorials {
-          @include flexbox(none, none, none);
-          img {
-            width: 40%;
-            margin-right: 1rem;
-
-          }
-
         }
       }
     }
