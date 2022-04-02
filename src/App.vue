@@ -4,7 +4,7 @@
     <hero-comp />
     <news-comp />
     <forum-comp />
-    <comunity-comp />
+    <community-comp />
     <footer-comp />
   </div>
 </template>
@@ -14,7 +14,7 @@ import HeaderComp from './components/HeaderComp.vue'
 import HeroComp from './components/HeroComp.vue'
 import NewsComp from './components/NewsComp.vue'
 import ForumComp from './components/ForumComp.vue'
-import ComunityComp from './components/ComunityComp.vue'
+import CommunityComp from './components/CommunityComp.vue'
 import FooterComp from './components/FooterComp.vue'
 
 export default {
@@ -24,7 +24,7 @@ export default {
     HeroComp,
     NewsComp,
     ForumComp,
-    ComunityComp,
+    CommunityComp,
     FooterComp
   }
 }

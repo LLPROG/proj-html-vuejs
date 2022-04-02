@@ -277,6 +277,8 @@ export default {
             @include flexbox(none, none, none);
             img {
               width: 40%;
+              height: 7rem;
+              object-fit: cover;
               margin-right: 1rem;
             }
             span {
