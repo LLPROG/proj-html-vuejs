@@ -6,7 +6,7 @@
 
       <!--nav-bar-->
       <ul class="nav-bar">
-        <li v-for="obj in arrLinkNav" :key="obj.id">
+        <li v-for="(obj, index) in arrLinkNav" :key="obj.id" @click="select(index)" :class="selectedLink == index ? 'selected' : '' ">
           <a href="#!">
             {{obj.name}}
           </a>
@@ -25,6 +25,7 @@ export default {
   name: 'headerComp',
   data () {
     return {
+      selectedLink: 0,
       arrLinkNav: [
         {
           name: 'Home',
@@ -58,7 +59,13 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    select (index) {
+      this.selectedLink = index
+    }
   }
+
 }
 </script>
 
@@ -78,11 +85,28 @@ header {
 
       li {
         list-style: none;
-        margin: 0 1rem;
+        margin: 0 1.5rem;
         a {
           text-decoration: none;
           color: white;
         }
+        a:hover {
+        opacity: 0.7;
+      }
+      }
+      .selected {
+        transform: translateY(10px);
+      }
+      .selected::after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background-color: $eastern-blue;
+        display: block;
+        position: relative;
+        top: 43px;
+        left: 50%;
+        transform: translate(-50%) rotate(45deg);
       }
     }
     .icon-search {

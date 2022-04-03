@@ -20,6 +20,11 @@ html {
    border: transparent;
    cursor: pointer;
    font-weight: bold;
+   transition: 0.5s;
+}
+
+.btn:hover {
+    border-radius: 20px;
 }
 
 .btn-shark {

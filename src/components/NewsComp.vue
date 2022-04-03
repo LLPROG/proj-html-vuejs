@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- top section -->
-    <section class="top">
-      <h4>
+    <section class="top-section">
+      <h4 class="top-title">
         avada forum is the place to be
       </h4>
-      <p>
+      <p class="top-content">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro reiciendis odio ullam nesciunt neque repellat reprehenderit eligendi est delectus sit sed veniam repudiandae minima modi debitis voluptatum, a rem architecto.
       </p>
     </section>
@@ -26,7 +26,7 @@
         <div class="section-articles">
           <!-- top articles 3 in a row -->
           <div class="top-article">
-            <card-news-comp  v-for="art in article.arrArticleTop" :key="art.id" :data-card="art"/>
+            <card-news-comp  v-for="art in article.arrArticleTop" :key="art.id" :data-card="art" class="card-article first-group"/>
           </div>
 
           <!-- main article just 1 -->
@@ -35,7 +35,7 @@
             <h2 class="main-article-title">{{article.arrMainArticle[0].title}}</h2>
             <p class="main-article-content">{{article.arrMainArticle[0].content}}</p>
             <button class="btn btn-shark">
-              read more <!--arrow right-->
+              read more &#62;
             </button>
           </div>
 
@@ -44,7 +44,7 @@
         <div class="section-articles">
           <!-- top articles 3 in a row -->
           <div class="top-article">
-            <card-news-comp  v-for="art in article.arrArticleBottom" :key="art.id" :data-card="art"/>
+            <card-news-comp  v-for="art in article.arrArticleBottom" :key="art.id" :data-card="art" class="card-article second-group"/>
           </div>
 
           <!-- cont for flex main articles and tutorial section  -->
@@ -55,7 +55,7 @@
               <h2 class="main-article-title">{{article.arrMainArticle[1].title}}</h2>
               <p class="main-article-content">{{article.arrMainArticle[1].content}}</p>
               <button class="btn btn-shark">
-                read more <!--arrow right-->
+                read more &#62;
               </button>
             </div>
 
@@ -90,6 +90,9 @@ import img4 from '../assets/img/post_feat_img_23-320x202.jpg'
 import img5 from '../assets/img/post_feat_img_24-320x202.jpg'
 import img6 from '../assets/img/post_feat_img_25-320x202.jpg'
 import CardNewsComp from './CardNewsComp.vue'
+
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export default {
   name: 'NewsComp',
@@ -189,26 +192,76 @@ export default {
   },
   components: {
     CardNewsComp
+  },
+  mounted () {
+    gsap.registerPlugin(ScrollTrigger)
+    gsap.to('.top-title', {
+      scrollTrigger: {
+        trigger: '.top-content',
+        toggleActions: 'restart none none none',
+        scrub: true,
+        end: 'top center'
+      },
+      duration: 3,
+      opacity: 1,
+      x: -30
+    })
+    gsap.to('.top-content', {
+      scrollTrigger: {
+        trigger: '.top-content',
+        scrub: true,
+        end: 'top center'
+      },
+      duration: 3,
+      opacity: 1,
+      x: 30
+
+    })
+    gsap.to('.card-article.first-group', {
+      scrollTrigger: {
+        trigger: '.card-article.first-group',
+        start: 'top bottom'
+      },
+      duration: 1,
+      opacity: 1,
+      x: 30
+    })
+    gsap.to('.card-article.second-group', {
+      scrollTrigger: {
+        trigger: '.card-article.second-group',
+        toggleActions: 'restart none none none',
+        start: 'top bottom'
+      },
+      duration: 1,
+      opacity: 1,
+      x: 30
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../assets/style.scss';
-.top {
+.top-section {
   width: 100%;
-  padding: 5rem 30rem;
+  padding: 3rem 30rem 5rem;
   text-align: center;
   background-color: $bizarre;
   h4 {
     margin: 2rem 0;
     text-transform: uppercase;
     color: $nevada;
+    opacity: 0;
+    position: relative;
+    left: 30px
   }
   p {
     line-height: 2rem;
     color: gray;
     font-size: 1.5em;
+    opacity: 0;
+    position: relative;
+    left: -30px
   }
 }
 
@@ -237,6 +290,11 @@ export default {
       text-align: left;
       .top-article {
         @include flexbox (space-between, none, none);
+        .card-article {
+          opacity: 0;
+          position: relative;
+          left: -30px;
+        }
       }
       .main-article {
         color: white;
@@ -260,8 +318,8 @@ export default {
         margin: 2rem 0;
       }
       .main-article.two {
-        width: 120%;
-        padding: 6rem 6rem;
+        width: 115%;
+        padding: 5rem;
         background-image: url('../assets/img/featured_article_2_bg.jpg');
         background-size: cover;
       }
@@ -272,7 +330,7 @@ export default {
         .tutorials {
           display: flex;
           flex-direction: column;
-          justify-content: space-around;
+          justify-content: space-between;
           .card-tutorials {
             @include flexbox(none, none, none);
             img {
@@ -292,6 +350,13 @@ export default {
               margin: 0 0.2rem;
               background-color: $nevada;
             }
+          }
+          .tutorial-title::after {
+            content: '';
+            display: block;
+            width: 30%;
+            border: 1px solid $salmon;
+            margin-top: 2rem;
           }
         }
       }

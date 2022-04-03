@@ -2,7 +2,7 @@
   <div class="bk-color">
     <div class="link-slide">
       <a href="#!" class="link">
-        read oru blog <!-- arrow right -->
+        read oru blog &#62;
       </a>
     </div>
 
@@ -34,7 +34,7 @@
 
     <div class="link-slide">
       <a href="#!" class="link">
-        go to our forum <!-- arrow right -->
+        go to our forum &#62;
       </a>
     </div>
   </div>
@@ -104,6 +104,10 @@ export default {
   .link {
     color: white;
     text-decoration: none;
+    transition: 0.1s;
+    &:hover {
+      color: $salmon;
+    }
   }
 }
 .bk-color {
@@ -139,9 +143,24 @@ export default {
         margin: 2rem 0;
         position: relative;
         background-color: white;
-        border-top: 5px solid $eastern-blue;
-
+        z-index: 1;
+        position: relative;
+        cursor: pointer;
+        &::before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 3%;
+          background-color: $eastern-blue;
+          transition: 0.3s linear;
+          z-index: -1;
+        }
+        &:hover::before {
+          height: 100%;
+        }
         .cont-icon-title {
+          z-index: 999;
           width: 100%;
           text-align: center;
           .cont-icon {
