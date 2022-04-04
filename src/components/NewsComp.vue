@@ -2,12 +2,14 @@
   <div>
     <!-- top section -->
     <section class="top-section">
-      <h4 class="top-title">
-        avada forum is the place to be
-      </h4>
-      <p class="top-content">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro reiciendis odio ullam nesciunt neque repellat reprehenderit eligendi est delectus sit sed veniam repudiandae minima modi debitis voluptatum, a rem architecto.
-      </p>
+      <div class="cont-top-section">
+        <h4 class="top-title">
+          avada forum is the place to be
+        </h4>
+        <p class="top-content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro reiciendis odio ullam nesciunt neque repellat reprehenderit eligendi est delectus sit sed veniam repudiandae minima modi debitis voluptatum, a rem architecto.
+        </p>
+      </div>
     </section>
     <!-- main section -->
     <section class="main">
@@ -195,47 +197,18 @@ export default {
   },
   mounted () {
     gsap.registerPlugin(ScrollTrigger)
-    gsap.to('.top-title', {
-      scrollTrigger: {
-        trigger: '.top-content',
-        toggleActions: 'restart none none none',
-        scrub: true,
-        end: 'top center'
-      },
-      duration: 3,
+    gsap.fromTo('.cont-top-section', { opacity: 0, x: -30 }, {
       opacity: 1,
-      x: -30
-    })
-    gsap.to('.top-content', {
-      scrollTrigger: {
-        trigger: '.top-content',
-        scrub: true,
-        end: 'top center'
-      },
-      duration: 3,
-      opacity: 1,
-      x: 30
-
-    })
-    gsap.to('.card-article.first-group', {
-      scrollTrigger: {
-        trigger: '.card-article.first-group',
-        start: 'top bottom'
-      },
       duration: 1,
-      opacity: 1,
-      x: 30
-    })
-    gsap.to('.card-article.second-group', {
+      x: 0,
       scrollTrigger: {
-        trigger: '.card-article.second-group',
-        toggleActions: 'restart none none none',
-        start: 'top bottom'
-      },
-      duration: 1,
-      opacity: 1,
-      x: 30
+        trigger: '.cont-top-section',
+        scrub: 0.5,
+        toggleActions: 'restart none none none'
+      }
     })
+    gsap.fromTo('.card-article.first-group', { opacity: 0, x: -30 }, { opacity: 1, duration: 2, x: 0, scrollTrigger: '.main-article.one' })
+    gsap.fromTo('.card-article.second-group', { opacity: 0, x: 30 }, { opacity: 1, duration: 2, x: 0, scrollTrigger: '.main-article.two' })
   }
 }
 </script>
@@ -251,17 +224,11 @@ export default {
     margin: 2rem 0;
     text-transform: uppercase;
     color: $nevada;
-    opacity: 0;
-    position: relative;
-    left: 30px
   }
   p {
     line-height: 2rem;
     color: gray;
     font-size: 1.5em;
-    opacity: 0;
-    position: relative;
-    left: -30px
   }
 }
 
@@ -290,11 +257,6 @@ export default {
       text-align: left;
       .top-article {
         @include flexbox (space-between, none, none);
-        .card-article {
-          opacity: 0;
-          position: relative;
-          left: -30px;
-        }
       }
       .main-article {
         color: white;

@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <div class="container">
       <!--logo-->
       <img src="../assets/img/logo.png" alt="logo">
@@ -21,6 +21,9 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+// import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
 export default {
   name: 'headerComp',
   data () {
@@ -64,6 +67,13 @@ export default {
     select (index) {
       this.selectedLink = index
     }
+  },
+  mounted () {
+    gsap.fromTo('.header', { opacity: 0, y: -30 }, {
+      opacity: 1,
+      y: 0,
+      delay: 4
+    })
   }
 
 }
@@ -75,10 +85,12 @@ header {
   width: 100%;
   padding: 2rem;
   background-color: $eastern-blue;
+  position: absolute;
+  top: 0;
+  z-index: 999;
 
   .container {
     @include flexbox(none, center, none);
-
     .nav-bar {
       margin-left: auto;
       @include flexbox(none, center, none);

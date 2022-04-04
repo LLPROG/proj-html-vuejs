@@ -23,7 +23,7 @@
             <div class="cont-icon">
               <font-awesome-icon class="card-icon" :icon="card.icon" />,
             </div>
-            <div class="title">
+            <div class="title-forum">
               {{card.title}}
             </div>
           </div>
@@ -182,7 +182,7 @@ export default {
               font-size: 2.5rem;
             }
           }
-          .title {
+          .title-forum {
             font-size: 1.2em;
             font-weight: bolder;
           }
