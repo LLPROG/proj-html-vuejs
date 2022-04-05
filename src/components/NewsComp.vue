@@ -50,12 +50,14 @@
           </div>
 
           <!-- cont for flex main articles and tutorial section  -->
-          <div class="cont-flex">
-            <!-- main article just 1 -->
+          <div class="cont-flex"  @mouseover="hover = true" @mouseleave="hover = false">
+            <!-- main article two slider -->
             <div class="main-article two">
-              <p class="product">Reviewed product</p>
-              <h2 class="main-article-title">{{article.arrMainArticle[1].title}}</h2>
-              <p class="main-article-content">{{article.arrMainArticle[1].content}}</p>
+              <button class="btn-slide slide-left" @click="slideLeft"><font-awesome-icon icon="fa-solid fa-chevron-left" /></button>
+              <button class="btn-slide slide-right" @click="slideRight"><font-awesome-icon icon="fa-solid fa-angle-right" /></button>
+              <img class="image-slider" :src="article.arrTutorial[selectedIndex].image" :alt="article.arrTutorial[selectedIndex].title">
+              <h2 class="main-article-title">{{article.arrTutorial[selectedIndex].title}}</h2>
+              <p class="main-article-content">{{article.arrTutorial[selectedIndex].content}}</p>
               <button class="btn btn-shark">
                 read more &#62;
               </button>
@@ -66,7 +68,7 @@
               <h2 class="tutorial-title">Tutorials & Guides</h2>
 
               <!-- card tutorials -->
-              <div class="card-tutorials" v-for="art in article.arrTutorial" :key="art.id">
+              <div class="card-tutorials" v-for="(art, index) in article.arrTutorial" :key="art.id" @click="selected(index)">
                 <img :src="art.image" :alt="art.title">
                 <div class="cont-content-tuto">
                   <h3 class="tuto-card-title">{{art.title}}</h3>
@@ -189,7 +191,9 @@ export default {
             id: 10
           }
         ]
-      }
+      },
+      selectedIndex: 0,
+      hover: false
     }
   },
   components: {
@@ -209,6 +213,36 @@ export default {
     })
     gsap.fromTo('.card-article.first-group', { opacity: 0, x: -30 }, { opacity: 1, duration: 2, x: 0, scrollTrigger: '.main-article.one' })
     gsap.fromTo('.card-article.second-group', { opacity: 0, x: 30 }, { opacity: 1, duration: 2, x: 0, scrollTrigger: '.main-article.two' })
+
+    const interval = setInterval(() => {
+      if (this.hover === false) {
+        if (this.selectedIndex < 2) {
+          this.selectedIndex++
+        } else {
+          this.selectedIndex = 0
+        }
+      }
+    }, 2500)
+    interval()
+  },
+  methods: {
+    selected (index) {
+      this.selectedIndex = index
+    },
+    slideLeft () {
+      if (this.selectedIndex > 0) {
+        this.selectedIndex--
+      } else {
+        this.selectedIndex = 2
+      }
+    },
+    slideRight () {
+      if (this.selectedIndex < 2) {
+        this.selectedIndex++
+      } else {
+        this.selectedIndex = 0
+      }
+    }
   }
 }
 </script>
@@ -281,11 +315,41 @@ export default {
       }
       .main-article.two {
         width: 115%;
-        padding: 5rem;
-        background-image: url('../assets/img/featured_article_2_bg.jpg');
+        padding: 10rem 4.7rem;
         background-size: cover;
+        position: relative;
+        color: black;
+        .image-slider {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+          filter: opacity(0.7);
+        }
+        .btn-slide {
+          position: absolute;
+          top: 50%;
+          transform: translate(0 -50%);
+          width: 2rem;
+          height: 2rem;
+          border: transparent;
+          border-radius: 50%;
+          background-color: $salmon;
+          cursor: pointer;
+          &.slide-left {
+            left: 30px;
+          }
+          &.slide-right {
+            right: 30px;
+          }
+        }
       }
       .cont-flex {
+        // border: 1px solid black;
         margin: 2rem 0;
         @include flexbox(none, none, none);
         gap: 2rem;
@@ -295,6 +359,7 @@ export default {
           justify-content: space-between;
           .card-tutorials {
             @include flexbox(none, none, none);
+            cursor: pointer;
             img {
               width: 40%;
               height: 7rem;
