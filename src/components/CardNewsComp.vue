@@ -25,6 +25,18 @@ export default {
 
 .card-article {
   width: 320px;
+  cursor: pointer;
+  transition: 0.5s;
+  &:hover {
+    transform: scale(1.05);
+  }
+  &:hover img {
+    border-radius: 20px;
+    filter: opacity(0.7);
+  }
+  img {
+    transition: 0.5s;
+  }
   .card-title {
     margin: 0.5rem 0;
   }

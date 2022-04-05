@@ -339,12 +339,16 @@ export default {
           border: transparent;
           border-radius: 50%;
           background-color: $salmon;
+          transition: 0.5s;
           cursor: pointer;
           &.slide-left {
             left: 30px;
           }
           &.slide-right {
             right: 30px;
+          }
+          &:hover {
+            transform: scale(1.5);
           }
         }
       }
