@@ -315,7 +315,7 @@ export default {
       }
       .main-article.two {
         width: 115%;
-        padding: 10rem 4.7rem;
+        padding: 10rem 5rem;
         background-size: cover;
         position: relative;
         color: black;
@@ -349,6 +349,9 @@ export default {
           }
           &:hover {
             transform: scale(1.5);
+          }
+          &:active {
+            transform: scale(1.1);
           }
         }
       }

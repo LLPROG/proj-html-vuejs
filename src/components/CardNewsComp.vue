@@ -26,7 +26,7 @@ export default {
 .card-article {
   width: 320px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.3s;
   &:hover {
     transform: scale(1.05);
   }
@@ -35,7 +35,7 @@ export default {
     filter: opacity(0.7);
   }
   img {
-    transition: 0.5s;
+    transition: 0.3s;
   }
   .card-title {
     margin: 0.5rem 0;
